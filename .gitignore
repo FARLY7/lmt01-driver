@@ -1,0 +1,8 @@
+# Debugger scripts
+*.jlink
+
+# Build folder
+build/
+
+#vscode files
+.vscode/
