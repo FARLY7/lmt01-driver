@@ -31,7 +31,7 @@
  * @brief Driver for LMT01 temperature sensor.
  */
 #include "lmt01.h"
-#include <math.h>
+#include <stddef.h>
 
 
 #define LEN(arr) ((int)(sizeof(arr) / sizeof(arr)[0])) /* Return length of array */
