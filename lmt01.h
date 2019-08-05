@@ -63,36 +63,34 @@ typedef enum {
 /*!
  * @brief Type definitions
  */
-typedef void (*lmt_timer_start_fptr_t)(void* timer);
-typedef void (*lmt_timer_stop_fptr_t)(void* timer);
-typedef void (*lmt_timer_set_cnt_fptr_t)(void* timer, uint32_t cnt);
-typedef uint32_t (*lmt_timer_get_cnt_fptr_t)(void* timer);
+typedef void (*lmt_timer_mode_fptr_t)(void* timer);
+typedef void (*lmt_timer_cnt_fptr_t)(void* timer, uint32_t *cnt);
 typedef void (*lmt_delay_ms_fptr_t)(uint32_t ms);
 
 /*!
  * @brief  lmt01 device structure
  */
-typedef struct {
+struct lmt01_dev {
 
     /* Timer context pointer */
     void *timer;
-
+    
     /* Start timer function pointer */
-    lmt_timer_start_fptr_t start_timer;
+    lmt_timer_mode_fptr_t start_timer;
 
     /* Stop timer function pointer */
-    lmt_timer_stop_fptr_t stop_timer;
+    lmt_timer_mode_fptr_t stop_timer;
 
     /* Set timer count function pointer */
-    lmt_timer_set_cnt_fptr_t set_timer_cnt;
+    lmt_timer_cnt_fptr_t set_timer_cnt;
 
     /* Get timer count function pointer */
-    lmt_timer_get_cnt_fptr_t get_timer_cnt;
+    lmt_timer_cnt_fptr_t get_timer_cnt;
 
     /* Delay (ms) function pointer */
     lmt_delay_ms_fptr_t delay_ms;
     
-} lmt01_dev;
+};
 
 
 /**
@@ -103,7 +101,7 @@ typedef struct {
   * @return result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_init(const lmt01_dev *dev);
+lmt_status_t lmt_init(const struct lmt01_dev *dev);
 
 /**
   * @brief  Obtains a pulse count reading from the LMT device
@@ -117,7 +115,7 @@ lmt_status_t lmt_init(const lmt01_dev *dev);
   * @return Result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_get_temperature(const lmt01_dev *dev, float *temp, lmt_conv_t type);
+lmt_status_t lmt_get_temperature(const struct lmt01_dev *dev, float *temp, lmt_conv_t type);
 
 
 /**
@@ -129,7 +127,7 @@ lmt_status_t lmt_get_temperature(const lmt01_dev *dev, float *temp, lmt_conv_t t
   * @return result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_get_pulse_count(const lmt01_dev *dev, uint32_t *pulses);
+lmt_status_t lmt_get_pulse_count(const struct lmt01_dev *dev, uint32_t *pulses);
 
 /**
   * @brief  Converts a pulse count to temperature equivalent
