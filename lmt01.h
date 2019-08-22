@@ -70,8 +70,8 @@ typedef void (*lmt_delay_ms_fptr_t)(uint32_t ms);
 /*!
  * @brief  lmt01 device structure
  */
-struct lmt01_dev {
-
+typedef struct
+{
     /* Timer context pointer */
     void *timer;
     
@@ -88,9 +88,9 @@ struct lmt01_dev {
     lmt_timer_cnt_fptr_t get_timer_cnt;
 
     /* Delay (ms) function pointer */
-    lmt_delay_ms_fptr_t delay_ms;
-    
-};
+    lmt_delay_ms_fptr_t delay_ms;    
+
+} lmt01_dev_t;
 
 
 /**
@@ -101,7 +101,7 @@ struct lmt01_dev {
   * @return result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_init(const struct lmt01_dev *dev);
+lmt_status_t lmt_init(const lmt01_dev_t *dev);
 
 /**
   * @brief  Obtains a pulse count reading from the LMT device
@@ -115,7 +115,7 @@ lmt_status_t lmt_init(const struct lmt01_dev *dev);
   * @return Result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_get_temperature(const struct lmt01_dev *dev, float *temp, lmt_conv_t type);
+lmt_status_t lmt_get_temperature(const lmt01_dev_t *dev, float *temp, lmt_conv_t type);
 
 
 /**
@@ -127,7 +127,7 @@ lmt_status_t lmt_get_temperature(const struct lmt01_dev *dev, float *temp, lmt_c
   * @return result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_get_pulse_count(const struct lmt01_dev *dev, uint32_t *pulses);
+lmt_status_t lmt_get_pulse_count(const lmt01_dev_t *dev, uint32_t *pulses);
 
 /**
   * @brief  Converts a pulse count to temperature equivalent

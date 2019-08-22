@@ -45,7 +45,7 @@
  * @return Result of API execution status
  * @retval zero -> Success / +ve value -> Warning / -ve value -> Error
  */
-static lmt_status_t null_ptr_check(const struct lmt01_dev *dev);
+static lmt_status_t null_ptr_check(const lmt01_dev_t *dev);
 
 /*!
  * @brief This internal API is used to count the number of pulses
@@ -57,7 +57,7 @@ static lmt_status_t null_ptr_check(const struct lmt01_dev *dev);
  * @return Number of pulses received from lmt01.
  * @retval pulses
  */
-static uint32_t count_pulses_ms(const struct lmt01_dev *dev, uint32_t period);
+static uint32_t count_pulses_ms(const lmt01_dev_t *dev, uint32_t period);
 
 /*!
  * @brief Map a value from one scale to another. Used for lookup-table.
@@ -100,7 +100,7 @@ static const int16_t lut[21][2] = {
   * @return result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_init(const struct lmt01_dev *dev)
+lmt_status_t lmt_init(const lmt01_dev_t *dev)
 {
     /* Check for null pointer in the device structure */
     if(null_ptr_check(dev) != LMT_OK)
@@ -124,7 +124,7 @@ lmt_status_t lmt_init(const struct lmt01_dev *dev)
   * @return result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_get_pulse_count(const struct lmt01_dev *dev, uint32_t *pulses)
+lmt_status_t lmt_get_pulse_count(const lmt01_dev_t *dev, uint32_t *pulses)
 {
     /* Check for null pointer in the device structure */
     if(null_ptr_check(dev) != LMT_OK)
@@ -161,7 +161,7 @@ lmt_status_t lmt_get_pulse_count(const struct lmt01_dev *dev, uint32_t *pulses)
   * @return Result of API execution status
   * @retval lmt_status_t
   */
-lmt_status_t lmt_get_temperature(const struct lmt01_dev *dev, float *temp, lmt_conv_t type)
+lmt_status_t lmt_get_temperature(const lmt01_dev_t *dev, float *temp, lmt_conv_t type)
 {
     lmt_status_t rslt;
     uint32_t pulses;
@@ -221,7 +221,7 @@ float lmt_pulses_to_temperature(uint32_t pulses, lmt_conv_t type)
  * @brief This internal API is used to count the number of pulses
  * received in a given period (ms).
  */
-static uint32_t count_pulses_ms(const struct lmt01_dev *dev, uint32_t period)
+static uint32_t count_pulses_ms(const lmt01_dev_t *dev, uint32_t period)
 {
     uint32_t cnt = 0;
     
@@ -250,7 +250,7 @@ static uint32_t count_pulses_ms(const struct lmt01_dev *dev, uint32_t period)
  * @brief This internal API is used to validate the device structure pointer for
  * null conditions.
  */
-static lmt_status_t null_ptr_check(const struct lmt01_dev *dev)
+static lmt_status_t null_ptr_check(const lmt01_dev_t *dev)
 {
     lmt_status_t rslt;
 
